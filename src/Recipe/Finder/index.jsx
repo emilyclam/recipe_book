@@ -1,11 +1,18 @@
-import React from "react";
+import React, { useState } from "react";
 import SearchBar from "./SearchBar";
 import RecipeList from "./RecipeList";
 
 const Finder = () => {
+  const [searchValue, setSearchValue] = useState('');
+  console.log(searchValue);
+
+  const handleSearch = (value) => {
+    setSearchValue(value);
+  };
+
   return (
     <>
-      <SearchBar />
+      <SearchBar onSearch={handleSearch}/>
       <RecipeList />
     </>
   );
