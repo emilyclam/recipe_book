@@ -13,3 +13,9 @@ export const Title = styled.h1`
   ${font.size(50)}
   ${font.bold}
 `;
+
+export const SavedIcon = styled.img`
+  align-self: center;
+  margin-left: 30px;
+  width: 40px;
+`;

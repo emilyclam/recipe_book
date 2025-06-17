@@ -15,4 +15,5 @@ export const Input = styled.input`
 export const Button = styled.button`
   padding: 10px 20px;
   cursor: pointer;
+  font-size: 15px;
 `;

@@ -26,7 +26,7 @@ def search(request):
         if card.find('div', class_='mntl-recipe-card-meta')
     ]
     recipe_objs = []
-    for link in links[:5]:  # only search first 5
+    for link in links[:6]:  # only search first 6
         recipe = {'url': link['href']}
         response2 = requests.get(link['href'])
         soup2 = BeautifulSoup(response2.text, 'html.parser')

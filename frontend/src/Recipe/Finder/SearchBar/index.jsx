@@ -16,9 +16,9 @@ const SearchBar = ({ onSearch }) => {
         value={inputValue}
         onChange={(e) => setInputValue(e.target.value)}
         placeholder="Search a recipe!"
-        autofocus
+        autoFocus
       />
-      <Button onClick={handleClick}>GO</Button>
+      <Button onClick={handleClick}>🔎</Button>
     </Bar>
   );
 };
