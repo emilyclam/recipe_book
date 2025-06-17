@@ -12,7 +12,7 @@ export const LoadingContainer = styled.div`
   margin-top: 50px;
 `;
 
-export const LoadingIcon = styled.img`
+export const Icon = styled.img`
   width: 200px;
   height: 200px;
   animation: ${spin} 1.5s ease infinite;

@@ -1,12 +1,12 @@
 import React, { useState } from "react";
 
 import SearchBar from "./SearchBar";
-import RecipeList from "./RecipeList";
-import { LoadingContainer, LoadingIcon } from "./Styles"
+import RecipeList from "../../shared/components/RecipeList";
+import LoadingIcon from "../../shared/components/LoadingIcon";
 
 const Finder = () => {
   const [recipes, setRecipes] = useState(null);
-  const [loading, setLoading] = useState(false)
+  const [loading, setLoading] = useState(false);
 
   const handleSearch = (value) => {
     setLoading(true);
@@ -22,11 +22,7 @@ const Finder = () => {
   return (
     <>
       <SearchBar onSearch={handleSearch}/>
-      { loading &&
-        <LoadingContainer>
-          <LoadingIcon src="/load-icon.png" alt="loading icon" />
-        </LoadingContainer>
-      }
+      { loading && <LoadingIcon /> }
       { recipes && !loading && <RecipeList recipes={recipes} />}
     </>
   );
