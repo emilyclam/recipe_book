@@ -2,7 +2,7 @@ import React from "react";
 import PropTypes from 'prop-types';
 
 import RecipeCard from "./RecipeCard";
-import { ListContainer, List } from "./Styles";
+import { NoRecipesMsg, ListContainer, List } from "./Styles";
 
 const propTypes = {
   recipes: PropTypes.arrayOf(PropTypes.shape({
@@ -16,18 +16,29 @@ const propTypes = {
 }
 
 const RecipeList = ({ recipes }) => {
-
+  const isSaved = (recipe) => {
+    console.log(recipe)
+    const saved = recipes.some(r => r.url === recipe.url)
+    console.log(saved)
+    return saved
+  }
   return (
-    <ListContainer>
-      <List>
-        {recipes.map((recipe, index) => (
-          <RecipeCard 
-            recipe={recipe}
-            index={index}
-          />
-        ))}
-      </List>
-    </ListContainer>
+    <>
+      {recipes.length == 0 ? 
+        <NoRecipesMsg>No recipes found!</NoRecipesMsg> :
+        <ListContainer>
+          <List>
+            {recipes.map((recipe, index) => (
+              <RecipeCard 
+                recipe={recipe}
+                isSaved={isSaved(recipe)}
+                key={recipe.url}
+              />
+            ))}
+          </List>
+        </ListContainer>
+      }
+    </>
   );
 };
 

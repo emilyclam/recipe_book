@@ -1,4 +1,5 @@
 import styled from 'styled-components';
+import { Link } from 'react-router-dom';
 import { font } from '../../shared/utils/styles';
 
 export const Header = styled.div`
@@ -14,8 +15,19 @@ export const Title = styled.h1`
   ${font.bold}
 `;
 
-export const SavedIcon = styled.img`
-  align-self: center;
-  margin-left: 30px;
+export const NavContainer = styled.div`
+  display: flex;
+  align-items: center;
+  position: absolute;
+  top: 40px;
+  right: 40px;
+  gap: 20px
+`;
+
+export const IconContainer = styled(Link)`
+  dispay: flex;
+`;
+
+export const NavIcon = styled.img`
   width: 40px;
 `;

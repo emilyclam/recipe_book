@@ -1,7 +1,7 @@
 import styled from 'styled-components';
 import { font } from '../../../../shared/utils/styles';
 
-export const Card = styled.a`
+export const Card = styled.div`
   border: solid 1px black;
   width: 300px;
   text-decoration: none;
@@ -9,7 +9,8 @@ export const Card = styled.a`
   display: block;
 `;
 
-export const ImgContainer = styled.div`
+export const ImgContainer = styled.a`
+  display: block;
   width: 300px;  
   height: 200px;
   overflow: hidden;
@@ -28,13 +29,28 @@ export const InfoContainer = styled.div`
   padding: 15px;
 `;
 
-export const RecipeTitle = styled.p`
+export const HeaderContainer = styled.div`
+  display: flex;
+  justify-content: space-between;
+`;
+
+export const RecipeTitle = styled.a`
   ${font.size(20)}
   ${font.bold}
+  color: black;
   margin: 0px;
+  cursor: pointer;
+  text-decoration: none;
   &:hover {
     text-decoration: underline;
   }
+`;
+
+export const SaveIcon = styled.img`
+  width: 25px;
+  align-self: flex-start;
+  margin-left: 5px;
+  cursor: pointer;
 `;
 
 export const DetailsContainer = styled.div`

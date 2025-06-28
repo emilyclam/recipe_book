@@ -15,7 +15,7 @@ const Saved = () => {
         setRecipes(data);
         setLoading(false);
       })
-      .catch((err) => console.error(err));
+      .catch((err) => console.error(err))
   }, []);
 
   return (

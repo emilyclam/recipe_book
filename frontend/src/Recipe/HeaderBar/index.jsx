@@ -1,15 +1,20 @@
 import React from "react";
-import { Link } from "react-router";
 
-import { Header, Title, SavedIcon } from './Styles';
+import { Header, Title, NavContainer, NavIcon, IconContainer } from './Styles';
 
 const HeaderBar = () => {
- return (
+ // should the nav be a separate component?
+  return (
   <Header>
     <Title>Recipe Book</Title>
-    <Link to="/saved" style={{display: "flex"}}>
-      <SavedIcon src="book-icon.png" alt="bookmark icon" />
-    </Link>
+    <NavContainer>
+      <IconContainer to="/saved">
+        <NavIcon src="book-icon.png" alt="bookmark icon" />
+      </IconContainer>
+      <IconContainer to="/search">
+        <NavIcon src="search-icon.png" alt="search icon" />
+      </IconContainer>
+    </NavContainer>
   </Header>
  );
 };
