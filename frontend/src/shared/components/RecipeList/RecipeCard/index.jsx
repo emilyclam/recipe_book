@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import { useOutletContext } from 'react-router-dom';
 import PropTypes from 'prop-types';
 
 import { Card, InfoContainer, ImgContainer, RecipeImg, HeaderContainer,
@@ -13,15 +14,18 @@ const propTypes = {
     time: PropTypes.string.isRequired,
     servings: PropTypes.number.isRequired,
   }).isRequired,
-  isSaved: PropTypes.bool.isRequired,
 }
 
-const RecipeCard = ({ recipe, isSaved }) => {
-  const [saved, makeSaved] = useState(isSaved);
-  console.log(saved)
+const RecipeCard = ({ recipe }) => {
+  const { savedRecipes, setSavedRecipes } = useOutletContext();
+
+  const isSaved = (recipe) => {
+    const saved = savedRecipes.some(r => r.url === recipe.url)
+    return saved
+  }
 
   const saveRecipe = () => {
-    if (!saved) {
+    if (!isSaved(recipe)) {
       fetch(`http://localhost:8000/api/add`, {
         method: "POST",
         headers: {
@@ -31,8 +35,7 @@ const RecipeCard = ({ recipe, isSaved }) => {
       })
         .then((res) => res.json())
         .then((data) => {
-          makeSaved(!saved);
-          console.log(data)
+          setSavedRecipes([...savedRecipes, recipe])
         })
         .catch((err) => console.error(err))
     } else {
@@ -42,7 +45,7 @@ const RecipeCard = ({ recipe, isSaved }) => {
         })
           .then((res) => res.json())
           .then((data) => {
-            makeSaved(!saved);
+            // makeSaved(!saved);
             console.log(data)
           })
           .catch((err) => console.error(err))
@@ -60,7 +63,7 @@ const RecipeCard = ({ recipe, isSaved }) => {
             {recipe.title}
           </RecipeTitle>
           <SaveIcon
-            src={saved ? "bookmark-filled.png" : "bookmark-outline.png"}
+            src={isSaved(recipe) ? "bookmark-filled.png" : "bookmark-outline.png"}
             alt="bookmark icon"
             onClick={saveRecipe}
           />
