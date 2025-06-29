@@ -6,6 +6,7 @@ import { NoRecipesMsg, ListContainer, List } from "./Styles";
 
 const propTypes = {
   recipes: PropTypes.arrayOf(PropTypes.shape({
+    id: PropTypes.number.isRequired,
     url: PropTypes.string.isRequired,
     img: PropTypes.number.isRequired,
     title: PropTypes.string.isRequired,
@@ -16,17 +17,16 @@ const propTypes = {
 }
 
 const RecipeList = ({ recipes }) => {
-
   return (
     <>
-      {recipes.length == 0 ? 
+      {recipes.length === 0 ? 
         <NoRecipesMsg>No recipes found!</NoRecipesMsg> :
         <ListContainer>
           <List>
-            {recipes.map((recipe, index) => (
+            {recipes.map((recipe) => (
               <RecipeCard 
                 recipe={recipe}
-                key={recipe.url}
+                key={recipe.id}
               />
             ))}
           </List>

@@ -2,6 +2,7 @@ from django.http import HttpResponse
 from rest_framework.decorators import api_view
 from rest_framework.response import Response
 from rest_framework import status
+import re
 
 import requests
 from bs4 import BeautifulSoup
@@ -29,14 +30,18 @@ def search(request):
     ]
     recipe_objs = []
     for link in links[:6]:  # only search first 6
-        print(link['href'])
         recipe = {'url': link['href']}
+        match = re.search(r"/recipe/(\d+)/", link['href'])
+        recipe['id'] = match.group(1)
+
         response2 = requests.get(link['href'])
         soup2 = BeautifulSoup(response2.text, 'html.parser')
         img = soup2.find('div', id='photo-dialog__item_1-0').find('img')
         final_img = requests.get(img['data-src'], allow_redirects=True)
         recipe['img'] = final_img.url
+        
         recipe['title'] = soup2.find('h1', class_='article-heading').get_text(strip=True)
+        
         try:
             recipe['rating'] = float(soup2.find(id='mm-recipes-review-bar__rating_1-0').get_text(strip=True))
         except:
@@ -52,7 +57,6 @@ def search(request):
         recipe['servings'] = servings_value.get_text(strip=True)
         if ' ' in recipe['servings']:
             recipe['servings'] = recipe['servings'].split()[0]
-        # print(recipe)
         
         recipe_objs.append(Recipe(**recipe)) 
     serializer = RecipeSerializer(recipe_objs, many=True)
@@ -68,6 +72,7 @@ def get_recipes(request):
 def add_recipe(request):
     r = request.data
     recipe = Recipe(
+        id=r['id'],
         img=r['img'],
         title = r['title'],
         rating = r['rating'],
@@ -76,7 +81,7 @@ def add_recipe(request):
         url=r['url'],
     )
     recipe.save()
-    return Response(recipe.id)
+    return Response(recipe.url)
 
 # edit as needed (why is there a separate pk param?)
 @api_view(['DELETE'])
@@ -84,6 +89,6 @@ def delete_recipe(request, pk):
     try:
         recipe = Recipe.objects.get(pk=pk)
         recipe.delete()
-        return Response({"message": "Deleted"}, status=status.HTTP_204_NO_CONTENT)
+        return Response(status=status.HTTP_204_NO_CONTENT)
     except Recipe.DoesNotExist:
-        return Response({"error": "Not found"}, status=status.HTTP_404_NOT_FOUND)
+        return Response(status=status.HTTP_404_NOT_FOUND)

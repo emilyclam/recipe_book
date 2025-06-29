@@ -1,4 +1,3 @@
-import React, { useState } from "react";
 import { useOutletContext } from 'react-router-dom';
 import PropTypes from 'prop-types';
 
@@ -7,6 +6,7 @@ import { Card, InfoContainer, ImgContainer, RecipeImg, HeaderContainer,
 
 const propTypes = {
   recipe: PropTypes.shape({
+    id: PropTypes.number.isRequired,
     url: PropTypes.string.isRequired,
     img: PropTypes.number.isRequired,
     title: PropTypes.string.isRequired,
@@ -39,14 +39,15 @@ const RecipeCard = ({ recipe }) => {
         })
         .catch((err) => console.error(err))
     } else {
-        fetch(`http://localhost:8000/api/delete`, {
-          method: "DELETE",
-          // add pk input?
+        fetch(`http://localhost:8000/api/delete/${recipe.id}`, {
+          method: "DELETE"
         })
-          .then((res) => res.json())
-          .then((data) => {
-            // makeSaved(!saved);
-            console.log(data)
+          .then((res) => {
+            if (res.ok) {
+              setSavedRecipes(savedRecipes => savedRecipes.filter(r => r.id !== recipe.id));
+            } else {
+              throw new Error(`Delete failed with status ${res.status}`);
+            }
           })
           .catch((err) => console.error(err))
     }
