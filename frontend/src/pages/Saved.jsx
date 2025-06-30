@@ -1,7 +1,7 @@
 import { useOutletContext } from 'react-router-dom';
 
-import RecipeList from "../../shared/components/RecipeList";
-import LoadingIcon from "../../shared/components/LoadingIcon";
+import RecipeList from '@components/RecipeList';
+import LoadingIcon from "../components/LoadingIcon";
 
 const Saved = () => {
   const { savedRecipes } = useOutletContext();

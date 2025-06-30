@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { useNavigate } from 'react-router-dom';
 
-import { LoginContainer, Title, Input, Button } from "./Styles";
+import { LoginContainer, Title, MediumInput, Button } from "@components/ui";
 
 const Login = () => {
   const navigate = useNavigate();
@@ -33,7 +33,7 @@ const Login = () => {
   return (
     <LoginContainer>
       <Title>Login</Title>
-      <Input
+      <MediumInput
         type="text"
         value={loginValue['username']}
         onChange={(e) => setLoginValue(prev => ({
@@ -43,7 +43,7 @@ const Login = () => {
         placeholder="Username"
         autoFocus
       />
-      <Input
+      <MediumInput
         type="password"
         value={loginValue['password']}
         onChange={(e) => setLoginValue(prev => ({

@@ -1,11 +1,11 @@
 import React from "react";
 
-import { Header, Title, NavContainer, NavIcon, IconContainer } from './Styles';
+import { HeaderContainer, Title, NavContainer, NavIcon, IconContainer } from "@components/ui";
 
 const HeaderBar = () => {
  // should the nav be a separate component?
   return (
-  <Header>
+  <HeaderContainer>
     <Title>Recipe Book</Title>
     <NavContainer>
       <IconContainer to="/saved">
@@ -15,7 +15,7 @@ const HeaderBar = () => {
         <NavIcon src="search-icon.png" alt="search icon" />
       </IconContainer>
     </NavContainer>
-  </Header>
+  </HeaderContainer>
  );
 };
 

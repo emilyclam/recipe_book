@@ -17,7 +17,6 @@ const propTypes = {
 }
 
 const RecipeList = ({ recipes }) => {
-  console.log(recipes)
   return (
     <>
       {recipes.length === 0 ? 

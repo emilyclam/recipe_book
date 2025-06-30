@@ -1,5 +1,5 @@
 import styled from 'styled-components';
-import { font } from '../../../../shared/utils/styles';
+import { font } from 'styles';
 
 export const Card = styled.div`
   border: solid 1px black;
