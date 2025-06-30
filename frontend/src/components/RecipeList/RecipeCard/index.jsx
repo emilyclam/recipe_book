@@ -30,17 +30,24 @@ const RecipeCard = ({ recipe }) => {
         method: "POST",
         headers: {
           'Content-Type': 'application/json',
+          'Authorization': `Bearer ${localStorage.getItem('access')}`,
         },
         body: JSON.stringify(recipe),
       })
-        .then((res) => res.json())
-        .then((data) => {
-          setSavedRecipes([...savedRecipes, recipe])
+        .then((res) => {
+          if (res.ok) {
+            setSavedRecipes([...savedRecipes, recipe])
+          } else {
+            throw new Error(`Delete failed with status ${res.status}`);
+          }
         })
         .catch((err) => console.error(err))
     } else {
         fetch(`http://localhost:8000/api/delete/${recipe.id}`, {
-          method: "DELETE"
+          method: "DELETE",
+          headers: {
+            'Authorization': `Bearer ${localStorage.getItem('access')}`,
+          }
         })
           .then((res) => {
             if (res.ok) {

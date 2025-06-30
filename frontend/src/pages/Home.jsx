@@ -6,23 +6,20 @@ import HeaderBar from '@components/HeaderBar';
 
 const Recipe = () => {
   const [savedRecipes, setSavedRecipes] = useState([]);
+  const access = localStorage.getItem('access');
 
   useEffect(() => {
-    async function fetchData() {
-      try {
-        const res = await authFetch('api/saved');
-        if (!res.ok) throw new Error('Failed to fetch protected data.');
-        
-        const json = await res.json();
-        console.log('fetching saved recipes')
-        console.log(json)
-        setSavedRecipes(json);
-      } catch (err) {
-        console.error(err.message);
+    fetch(`http://localhost:8000/api/saved`, {
+      method: 'GET',
+      headers: {
+        'Authorization': `Bearer ${localStorage.getItem('access')}`,
       }
-    }
-
-    fetchData();
+    })
+      .then((res) => res.json())
+      .then((data) => {
+        setSavedRecipes(data);
+      })
+      .catch((err) => console.error(err))
   }, []);
 
   return (
