@@ -4,7 +4,7 @@ import { Outlet } from 'react-router-dom';
 import HeaderBar from "./HeaderBar";
 
 const Recipe = () => {
-  const [savedRecipes, setSavedRecipes] = useState(null);
+  const [savedRecipes, setSavedRecipes] = useState([]);
 
   useEffect(() => {
     fetch(`http://localhost:8000/api/saved`)

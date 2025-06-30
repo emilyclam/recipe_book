@@ -1,11 +1,12 @@
 from django.http import HttpResponse
-from rest_framework.decorators import api_view
+from rest_framework.decorators import api_view, permission_classes
+from rest_framework.permissions import IsAuthenticated
 from rest_framework.response import Response
 from rest_framework import status
-import re
 
 import requests
 from bs4 import BeautifulSoup
+import re
 
 from .models import Recipe
 from .serializers import RecipeSerializer
@@ -63,12 +64,14 @@ def search(request):
     return Response(serializer.data)
 
 @api_view(['GET'])
+@permission_classes([IsAuthenticated])
 def get_recipes(request):
     recipes = Recipe.objects.all()
     serializer = RecipeSerializer(recipes, many=True)
     return Response(serializer.data)
 
 @api_view(['POST'])
+@permission_classes([IsAuthenticated])
 def add_recipe(request):
     r = request.data
     recipe = Recipe(
@@ -83,8 +86,8 @@ def add_recipe(request):
     recipe.save()
     return Response(recipe.url)
 
-# edit as needed (why is there a separate pk param?)
 @api_view(['DELETE'])
+@permission_classes([IsAuthenticated])
 def delete_recipe(request, pk):
     try:
         recipe = Recipe.objects.get(pk=pk)
