@@ -1,14 +1,16 @@
 import React, { useState } from "react";
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, Link } from 'react-router-dom';
+import styled from 'styled-components';
+import { font } from "styles";
 
-import { LoginContainer, Title, MediumInput, Button } from "@components/ui";
+import { LoginContainer, SubTitle, MediumInput, Button } from "@components/ui";
 
 const Login = () => {
   const navigate = useNavigate();
   const [loginValue, setLoginValue] = useState({'username': '', 'password': ''});
   
   const login = () => {
-    fetch('http://localhost:8000/api/token', {
+    fetch('http://localhost:8000/api/accounts/token', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json'
@@ -32,7 +34,7 @@ const Login = () => {
   
   return (
     <LoginContainer>
-      <Title>Login</Title>
+      <SubTitle>Login</SubTitle>
       <MediumInput
         type="text"
         value={loginValue['username']}
@@ -53,8 +55,15 @@ const Login = () => {
         placeholder="Password"
       />
       <Button onClick={login}>Login</Button>
+      or <StyledLink to="/signup">Sign Up</StyledLink>
     </LoginContainer>
   );
 }
+
+const StyledLink = styled(Link)`
+  color: black;
+  ${font.size(15)}
+  ${font.bold}
+`;
 
 export default Login;

@@ -26,7 +26,7 @@ const RecipeCard = ({ recipe }) => {
 
   const saveRecipe = () => {
     if (!isSaved(recipe)) {
-      fetch(`http://localhost:8000/api/add`, {
+      fetch(`http://localhost:8000/api/recipes/add`, {
         method: "POST",
         headers: {
           'Content-Type': 'application/json',
@@ -43,7 +43,7 @@ const RecipeCard = ({ recipe }) => {
         })
         .catch((err) => console.error(err))
     } else {
-        fetch(`http://localhost:8000/api/delete/${recipe.recipe_id}`, {
+        fetch(`http://localhost:8000/api/recipes/delete/${recipe.recipe_id}`, {
           method: "DELETE",
           headers: {
             'Authorization': `Bearer ${localStorage.getItem('access')}`,

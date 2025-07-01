@@ -6,7 +6,7 @@ from django.db import migrations, models
 class Migration(migrations.Migration):
 
     dependencies = [
-        ('api', '0008_remove_recipe_id_alter_recipe_url'),
+        ('recipes', '0008_remove_recipe_id_alter_recipe_url'),
     ]
 
     operations = [

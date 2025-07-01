@@ -1,4 +1,3 @@
-from django.http import HttpResponse
 from rest_framework.decorators import api_view, permission_classes
 from rest_framework.permissions import IsAuthenticated
 from rest_framework.response import Response
@@ -11,9 +10,6 @@ import re
 from .models import Recipe
 from .serializers import RecipeSerializer
 
-
-def index(request):
-    return HttpResponse("Hello, world. You're at the api index.")
 
 #TODO: make this code cleaner
 @api_view(['GET'])
@@ -63,6 +59,7 @@ def search(request):
     serializer = RecipeSerializer(recipe_objs, many=True)
     return Response(serializer.data)
 
+
 @api_view(['GET'])
 @permission_classes([IsAuthenticated])
 def get_recipes(request):
@@ -70,6 +67,7 @@ def get_recipes(request):
     print(request.user)
     serializer = RecipeSerializer(recipes, many=True)
     return Response(serializer.data)
+
 
 @api_view(['POST'])
 @permission_classes([IsAuthenticated])
@@ -87,6 +85,7 @@ def add_recipe(request):
     )
     recipe.save()
     return Response(recipe.url)
+
 
 @api_view(['DELETE'])
 @permission_classes([IsAuthenticated])

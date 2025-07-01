@@ -8,7 +8,7 @@ const Recipe = () => {
   const [savedRecipes, setSavedRecipes] = useState(null);
 
   useEffect(() => {
-    fetch(`http://localhost:8000/api/saved`, {
+    fetch(`http://localhost:8000/api/recipes/saved`, {
       method: 'GET',
       headers: {
         'Authorization': `Bearer ${localStorage.getItem('access')}`

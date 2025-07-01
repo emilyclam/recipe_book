@@ -8,7 +8,7 @@ from django.db import migrations, models
 class Migration(migrations.Migration):
 
     dependencies = [
-        ('api', '0010_savedrecipe'),
+        ('recipes', '0010_savedrecipe'),
         migrations.swappable_dependency(settings.AUTH_USER_MODEL),
     ]
 

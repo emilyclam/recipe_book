@@ -12,7 +12,7 @@ const Search = () => {
 
   const handleSearch = () => {
     setLoading(true);
-    fetch(`http://localhost:8000/api/search?input=${inputValue}`)
+    fetch(`http://localhost:8000/api/recipes/search?input=${inputValue}`)
       .then((res) => res.json())
       .then((data) => {
         setRecipes(data);

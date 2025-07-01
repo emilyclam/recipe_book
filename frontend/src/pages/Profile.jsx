@@ -17,7 +17,7 @@ const Profile = () => {
       <SubTitle>Hello, Chef</SubTitle>
       <p>Username: </p>
       <p>Password: ***</p>
-      <p>Saved Recipes: {savedRecipes.length || 0}</p>
+      <p>Saved Recipes: {savedRecipes ? savedRecipes.length : 0}</p>
       <Button onClick={logout}>Logout</Button>
     </>
   )
