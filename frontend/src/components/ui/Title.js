@@ -8,3 +8,10 @@ export const Title = styled.h1`
   ${font.size(40)}
   ${font.bold}
 `;
+
+export const SubTitle = styled.h2`
+  text-transform: uppercase;
+  font-style: italic;
+  ${font.size(30)}
+  ${font.bold}
+`;

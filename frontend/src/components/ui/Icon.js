@@ -6,5 +6,5 @@ export const IconContainer = styled(Link)`
 `;
 
 export const NavIcon = styled.img`
-  width: 40px;
+  height: 40px;
 `;

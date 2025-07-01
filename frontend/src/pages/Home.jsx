@@ -3,6 +3,7 @@ import { Outlet } from 'react-router-dom';
 
 import { authFetch } from 'api/authFetch';
 import HeaderBar from '@components/HeaderBar';
+import { BodyContainer } from '@components/ui';
 
 const Recipe = () => {
   const [savedRecipes, setSavedRecipes] = useState([]);
@@ -12,7 +13,7 @@ const Recipe = () => {
     fetch(`http://localhost:8000/api/saved`, {
       method: 'GET',
       headers: {
-        'Authorization': `Bearer ${localStorage.getItem('access')}`,
+        'Authorization': `Bearer ${localStorage.getItem('access')}`
       }
     })
       .then((res) => res.json())
@@ -25,7 +26,9 @@ const Recipe = () => {
   return (
     <>
       <HeaderBar />
-      <Outlet context={{ savedRecipes, setSavedRecipes }} />
+      <BodyContainer>
+        <Outlet context={{ savedRecipes, setSavedRecipes }} />
+      </BodyContainer>
     </>
   );
 };

@@ -1,4 +1,5 @@
 import styled from 'styled-components';
+import { Outlet } from 'react-router-dom';
 
 export const LoginContainer = styled.div`
   margin-top: 6px;
@@ -21,4 +22,10 @@ export const HeaderContainer = styled.div`
   margin-top: 6px;
   display: flex;
   justify-content: center;
+`;
+
+export const BodyContainer = styled.div`
+  width: 80%;
+  min-width: 1000px;
+  margin: auto;
 `;

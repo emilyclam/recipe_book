@@ -7,7 +7,7 @@ const Login = () => {
   const navigate = useNavigate();
   const [loginValue, setLoginValue] = useState({'username': '', 'password': ''});
   
-  const handleClick = () => {
+  const login = () => {
     fetch('http://localhost:8000/api/token', {
       method: 'POST',
       headers: {
@@ -52,7 +52,7 @@ const Login = () => {
         }))}
         placeholder="Password"
       />
-      <Button onClick={handleClick}>Login</Button>
+      <Button onClick={login}>Login</Button>
     </LoginContainer>
   );
 }
