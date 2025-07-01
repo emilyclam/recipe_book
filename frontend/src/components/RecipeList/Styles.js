@@ -11,7 +11,7 @@ export const ListContainer = styled.div`
 `;
 
 export const List = styled.div`
-  margin: 40px;
+  margin-top: 40px;
   display: flex;
   gap: 20px;
   flex-wrap: wrap;

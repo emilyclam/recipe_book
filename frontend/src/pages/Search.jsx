@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import styled from 'styled-components';
 
-import { WideInput, Button } from "@components/ui";
+import { WideInput, Button, SubTitle } from "@components/ui";
 import RecipeList from "@components/RecipeList";
 import LoadingIcon from "@components/LoadingIcon";
 
@@ -23,6 +23,7 @@ const Search = () => {
 
   return (
     <>
+      <SubTitle>Search</SubTitle>
       <Bar>
         <WideInput
           type="text"
@@ -42,7 +43,6 @@ const Search = () => {
 export const Bar = styled.div`
   width: 100%;
   display: flex;
-  justify-content: center;
   gap: 10px;
 `;
 

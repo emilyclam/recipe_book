@@ -1,7 +1,7 @@
 import styled from 'styled-components';
 
 export const LoginContainer = styled.div`
-  margin-top: 6px;
+  margin-top: 100px;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -25,6 +25,5 @@ export const HeaderContainer = styled.div`
 
 export const BodyContainer = styled.div`
   width: 80%;
-  min-width: 1000px;
   margin: auto;
 `;

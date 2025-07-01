@@ -5,7 +5,7 @@ import HeaderBar from '@components/HeaderBar';
 import { BodyContainer } from '@components/ui';
 
 const Recipe = () => {
-  const [savedRecipes, setSavedRecipes] = useState([]);
+  const [savedRecipes, setSavedRecipes] = useState(null);
 
   useEffect(() => {
     fetch(`http://localhost:8000/api/saved`, {
