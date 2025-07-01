@@ -1,7 +1,7 @@
 from rest_framework import serializers
 
 class RecipeSerializer(serializers.Serializer):
-	id = serializers.IntegerField()
+	recipe_id = serializers.IntegerField()
 	img = serializers.URLField()
 	title = serializers.CharField(max_length=150)
 	rating = serializers.FloatField()

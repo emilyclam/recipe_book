@@ -33,7 +33,7 @@ def search(request):
     for link in links[:6]:  # only search first 6
         recipe = {'url': link['href']}
         match = re.search(r"/recipe/(\d+)/", link['href'])
-        recipe['id'] = match.group(1)
+        recipe['recipe_id'] = match.group(1)
 
         response2 = requests.get(link['href'])
         soup2 = BeautifulSoup(response2.text, 'html.parser')
@@ -66,7 +66,8 @@ def search(request):
 @api_view(['GET'])
 @permission_classes([IsAuthenticated])
 def get_recipes(request):
-    recipes = Recipe.objects.all()
+    recipes = Recipe.objects.filter(user=request.user)
+    print(request.user)
     serializer = RecipeSerializer(recipes, many=True)
     return Response(serializer.data)
 
@@ -75,7 +76,8 @@ def get_recipes(request):
 def add_recipe(request):
     r = request.data
     recipe = Recipe(
-        id=r['id'],
+        recipe_id=r['recipe_id'],
+        user=request.user,
         img=r['img'],
         title = r['title'],
         rating = r['rating'],
@@ -88,9 +90,9 @@ def add_recipe(request):
 
 @api_view(['DELETE'])
 @permission_classes([IsAuthenticated])
-def delete_recipe(request, pk):
+def delete_recipe(request, recipe_id):
     try:
-        recipe = Recipe.objects.get(pk=pk)
+        recipe = Recipe.objects.get(recipe_id=recipe_id, user=request.user)
         recipe.delete()
         return Response(status=status.HTTP_204_NO_CONTENT)
     except Recipe.DoesNotExist:

@@ -1,7 +1,6 @@
 import { useOutletContext } from 'react-router-dom';
 import { useNavigate } from 'react-router-dom';
 
-import LoadingIcon from "@components/LoadingIcon";
 import { Button, SubTitle } from '@components/ui';
 
 const Profile = () => {

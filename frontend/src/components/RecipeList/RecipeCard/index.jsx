@@ -6,7 +6,7 @@ import { Card, InfoContainer, ImgContainer, RecipeImg, HeaderContainer,
 
 const propTypes = {
   recipe: PropTypes.shape({
-    id: PropTypes.number.isRequired,
+    recipe_id: PropTypes.number.isRequired,
     url: PropTypes.string.isRequired,
     img: PropTypes.number.isRequired,
     title: PropTypes.string.isRequired,
@@ -43,7 +43,7 @@ const RecipeCard = ({ recipe }) => {
         })
         .catch((err) => console.error(err))
     } else {
-        fetch(`http://localhost:8000/api/delete/${recipe.id}`, {
+        fetch(`http://localhost:8000/api/delete/${recipe.recipe_id}`, {
           method: "DELETE",
           headers: {
             'Authorization': `Bearer ${localStorage.getItem('access')}`,
@@ -51,7 +51,7 @@ const RecipeCard = ({ recipe }) => {
         })
           .then((res) => {
             if (res.ok) {
-              setSavedRecipes(savedRecipes => savedRecipes.filter(r => r.id !== recipe.id));
+              setSavedRecipes(savedRecipes => savedRecipes.filter(r => r.recipe_id !== recipe.recipe_id));
             } else {
               throw new Error(`Delete failed with status ${res.status}`);
             }

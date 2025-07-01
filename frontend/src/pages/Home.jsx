@@ -1,13 +1,11 @@
 import { useEffect, useState } from 'react';
 import { Outlet } from 'react-router-dom';
 
-import { authFetch } from 'api/authFetch';
 import HeaderBar from '@components/HeaderBar';
 import { BodyContainer } from '@components/ui';
 
 const Recipe = () => {
   const [savedRecipes, setSavedRecipes] = useState([]);
-  const access = localStorage.getItem('access');
 
   useEffect(() => {
     fetch(`http://localhost:8000/api/saved`, {

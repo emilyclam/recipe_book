@@ -10,9 +10,9 @@ const Search = () => {
   const [loading, setLoading] = useState(false);
   const [inputValue, setInputValue] = useState('');
 
-  const handleSearch = (value) => {
+  const handleSearch = () => {
     setLoading(true);
-    fetch(`http://localhost:8000/api/search?input=${value}`)
+    fetch(`http://localhost:8000/api/search?input=${inputValue}`)
       .then((res) => res.json())
       .then((data) => {
         setRecipes(data);

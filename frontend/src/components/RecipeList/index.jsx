@@ -6,7 +6,7 @@ import { NoRecipesMsg, ListContainer, List } from "./Styles";
 
 const propTypes = {
   recipes: PropTypes.arrayOf(PropTypes.shape({
-    id: PropTypes.number.isRequired,
+    recipe_id: PropTypes.number.isRequired,
     url: PropTypes.string.isRequired,
     img: PropTypes.number.isRequired,
     title: PropTypes.string.isRequired,
@@ -26,7 +26,7 @@ const RecipeList = ({ recipes }) => {
             {recipes.map((recipe) => (
               <RecipeCard 
                 recipe={recipe}
-                key={recipe.id}
+                key={recipe.recipe_id}
               />
             ))}
           </List>
