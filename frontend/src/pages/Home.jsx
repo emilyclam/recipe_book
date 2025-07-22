@@ -3,20 +3,15 @@ import { Outlet } from 'react-router-dom';
 
 import HeaderBar from '@components/HeaderBar';
 import { BodyContainer } from '@components/ui';
+import api from '@api/api';
 
 const Recipe = () => {
   const [savedRecipes, setSavedRecipes] = useState(null);
 
   useEffect(() => {
-    fetch(`http://localhost:8000/api/recipes/saved`, {
-      method: 'GET',
-      headers: {
-        'Authorization': `Bearer ${localStorage.getItem('access')}`
-      }
-    })
-      .then((res) => res.json())
-      .then((data) => {
-        setSavedRecipes(data);
+    api.get('/api/recipes/saved')
+      .then((res) => {
+        setSavedRecipes(res.data);
       })
       .catch((err) => console.error(err))
   }, []);

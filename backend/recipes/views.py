@@ -64,7 +64,6 @@ def search(request):
 @permission_classes([IsAuthenticated])
 def get_recipes(request):
     recipes = Recipe.objects.filter(user=request.user)
-    print(request.user)
     serializer = RecipeSerializer(recipes, many=True)
     return Response(serializer.data)
 

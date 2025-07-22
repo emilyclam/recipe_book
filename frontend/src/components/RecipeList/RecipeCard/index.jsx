@@ -3,6 +3,7 @@ import PropTypes from 'prop-types';
 
 import { Card, InfoContainer, ImgContainer, RecipeImg, HeaderContainer,
   RecipeTitle, SaveIcon, DetailsContainer, RecipeDetail } from "./Styles";
+import api from '@api/api';
 
 const propTypes = {
   recipe: PropTypes.shape({
@@ -26,37 +27,17 @@ const RecipeCard = ({ recipe }) => {
 
   const saveRecipe = () => {
     if (!isSaved(recipe)) {
-      fetch(`http://localhost:8000/api/recipes/add`, {
-        method: "POST",
-        headers: {
-          'Content-Type': 'application/json',
-          'Authorization': `Bearer ${localStorage.getItem('access')}`,
-        },
-        body: JSON.stringify(recipe),
-      })
+      api.post('/api/recipes/add', recipe)
         .then((res) => {
-          if (res.ok) {
-            setSavedRecipes([...savedRecipes, recipe])
-          } else {
-            throw new Error(`Delete failed with status ${res.status}`);
-          }
+          setSavedRecipes([...savedRecipes, recipe])
         })
-        .catch((err) => console.error(err))
+        .catch((err) => console.error("Add failed:", err))
     } else {
-        fetch(`http://localhost:8000/api/recipes/delete/${recipe.recipe_id}`, {
-          method: "DELETE",
-          headers: {
-            'Authorization': `Bearer ${localStorage.getItem('access')}`,
-          }
+      api.delete(`/api/recipes/delete/${recipe.recipe_id}`)
+        .then((res) => {
+          setSavedRecipes(savedRecipes => savedRecipes.filter(r => r.recipe_id !== recipe.recipe_id));
         })
-          .then((res) => {
-            if (res.ok) {
-              setSavedRecipes(savedRecipes => savedRecipes.filter(r => r.recipe_id !== recipe.recipe_id));
-            } else {
-              throw new Error(`Delete failed with status ${res.status}`);
-            }
-          })
-          .catch((err) => console.error(err))
+        .catch((err) => console.error("Delete failed:", err))
     }
   }
 

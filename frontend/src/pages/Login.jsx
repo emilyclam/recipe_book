@@ -1,39 +1,38 @@
 import React, { useState } from "react";
 import { useNavigate, Link } from 'react-router-dom';
 import styled from 'styled-components';
-import { font } from "styles";
 
 import { LoginContainer, SubTitle, MediumInput, Button } from "@components/ui";
+import { font } from "styles";
+import { login } from "@api/auth";
 
 const Login = () => {
   const navigate = useNavigate();
+  const [shaking, setShaking] = useState(false);
   const [loginValue, setLoginValue] = useState({'username': '', 'password': ''});
   
-  const login = () => {
-    fetch('http://localhost:8000/api/accounts/token', {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json'
-      },
-      body: JSON.stringify({'username': loginValue['username'], 'password': loginValue['password']})
-    })
-      .then((res) => {
-        if (!res.ok) {
-          setLoginValue({'username': '', 'password': ''});
-          throw res;
-        }
-        return res.json();
-      })
-      .then((data) => {
-        localStorage.setItem('access', data.access);
-        localStorage.setItem('refresh', data.refresh);
-        navigate('/search');
-      })
-      .catch((err) => console.error(err));
+  const handleLogin = async (e) => {
+    e.preventDefault();
+    const res = await login(loginValue['username'], loginValue['password']);
+    
+    if (res.success) {
+      navigate('/search');
+    } else {
+      setLoginValue({'username': '', 'password': ''});
+      triggerShake();
+      console.error(res.error)
+    }
   }
+
+  const triggerShake = () => {
+    setShaking(true);
+    setTimeout(() => {
+      setShaking(false);
+    }, 2000);
+  };
   
   return (
-    <LoginContainer>
+    <LoginContainer onSubmit={handleLogin}>
       <SubTitle>Login</SubTitle>
       <MediumInput
         type="text"
@@ -43,6 +42,7 @@ const Login = () => {
           username: e.target.value
         }))}
         placeholder="Username"
+        $shaking={shaking}
         autoFocus
       />
       <MediumInput
@@ -53,8 +53,13 @@ const Login = () => {
           password: e.target.value
         }))}
         placeholder="Password"
+        $shaking={shaking}
       />
-      <Button onClick={login}>Login</Button>
+      <ErrorText
+        style={{ visibility: shaking ? 'visible' : 'hidden' }}>
+        Username or password is incorrect. Please try again.
+      </ErrorText>
+      <Button type="submit">Login</Button>
       or <StyledLink to="/signup">Sign Up</StyledLink>
     </LoginContainer>
   );
@@ -64,6 +69,10 @@ const StyledLink = styled(Link)`
   color: black;
   ${font.size(15)}
   ${font.bold}
+`;
+
+const ErrorText = styled.p`
+  color: red;
 `;
 
 export default Login;

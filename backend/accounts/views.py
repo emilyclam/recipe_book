@@ -9,6 +9,6 @@ from .serializers import SignUpSerializer
 def signup(request):
 	serializer = SignUpSerializer(data=request.data)
 	if serializer.is_valid():
-		user = serializer.save()
+		serializer.save()
 		return Response({'message': 'User created successfully'}, status=status.HTTP_201_CREATED)
 	return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)

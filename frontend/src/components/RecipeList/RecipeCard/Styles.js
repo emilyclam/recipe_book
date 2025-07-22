@@ -1,5 +1,16 @@
-import styled from 'styled-components';
+import styled, { keyframes } from 'styled-components';
 import { font } from 'styles';
+
+const slideUp = keyframes`
+  from {
+    transform: translateY(40px);
+    opacity: 0;
+  }
+  to {
+    transform: translateY(0);
+    opacity: 1;
+  }
+`;
 
 export const Card = styled.div`
   border: solid 1px black;
@@ -7,6 +18,7 @@ export const Card = styled.div`
   text-decoration: none;
   color: black;
   display: block;
+  animation: ${slideUp} 0.4s ease-out forwards;
 `;
 
 export const ImgContainer = styled.a`

@@ -8,14 +8,14 @@ const HeaderBar = () => {
   <HeaderContainer>
     <Title>Recipe Book</Title>
     <NavContainer>
-      <IconContainer to="/profile">
-        <NavIcon src="user-icon.jpg" alt="user icon" />
+      <IconContainer to="/search">
+        <NavIcon src="search-icon.png" alt="search icon" />
       </IconContainer>
       <IconContainer to="/saved">
         <NavIcon src="book-icon.png" alt="bookmark icon" />
       </IconContainer>
-      <IconContainer to="/search">
-        <NavIcon src="search-icon.png" alt="search icon" />
+      <IconContainer to="/profile">
+        <NavIcon src="user-icon.jpg" alt="user icon" />
       </IconContainer>
     </NavContainer>
   </HeaderContainer>

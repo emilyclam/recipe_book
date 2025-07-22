@@ -4,18 +4,19 @@ import styled from 'styled-components';
 import { WideInput, Button, SubTitle } from "@components/ui";
 import RecipeList from "@components/RecipeList";
 import LoadingIcon from "@components/LoadingIcon";
+import api from "@api/api";
 
 const Search = () => {
   const [recipes, setRecipes] = useState(null);
   const [loading, setLoading] = useState(false);
   const [inputValue, setInputValue] = useState('');
 
-  const handleSearch = () => {
+  const handleSearch = (e) => {
+    e.preventDefault();
     setLoading(true);
-    fetch(`http://localhost:8000/api/recipes/search?input=${inputValue}`)
-      .then((res) => res.json())
-      .then((data) => {
-        setRecipes(data);
+    api.get(`/api/recipes/search?input=${inputValue}`)
+      .then((res) => {
+        setRecipes(res.data);
         setLoading(false);
       })
       .catch((err) => console.error(err));
@@ -24,7 +25,7 @@ const Search = () => {
   return (
     <>
       <SubTitle>Search</SubTitle>
-      <Bar>
+      <Bar onSubmit={handleSearch}>
         <WideInput
           type="text"
           value={inputValue}
@@ -32,7 +33,7 @@ const Search = () => {
           placeholder="Search a recipe!"
           autoFocus
         />
-        <Button onClick={handleSearch}>🔎</Button>
+        <Button type="submit">🔎</Button>
       </Bar>
       { loading && <LoadingIcon /> }
       { recipes && !loading && <RecipeList recipes={recipes} />}
@@ -40,7 +41,7 @@ const Search = () => {
   );
 };
 
-export const Bar = styled.div`
+const Bar = styled.form`
   width: 100%;
   display: flex;
   gap: 10px;
