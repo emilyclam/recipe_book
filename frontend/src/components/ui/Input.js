@@ -17,6 +17,11 @@ export const Input = styled.input`
     `}
 `;
 
+export const SkinnyInput = styled(Input)`
+  padding: 5px 7px;
+  margin-left: 5px;
+`;
+
 export const MediumInput = styled(Input)`
   width: 400px;
 `;
