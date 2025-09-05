@@ -2,6 +2,7 @@ import { useEffect, useState } from 'react';
 import { Outlet } from 'react-router-dom';
 
 import HeaderBar from '@components/HeaderBar';
+import Footer from '@components/Footer';
 import { BodyContainer } from '@components/ui';
 import api from '@api/api';
 
@@ -22,6 +23,7 @@ const Recipe = () => {
       <BodyContainer>
         <Outlet context={{ savedRecipes, setSavedRecipes }} />
       </BodyContainer>
+      <Footer />
     </>
   );
 };

@@ -1,5 +1,6 @@
 import React from 'react';
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
+import styled from 'styled-components';
 
 import Login from './pages/Login';
 import Recipe from './pages/Home';
@@ -10,7 +11,7 @@ import SignUp from 'pages/SignUp';
 
 function App() {
   return (
-    <>
+    <Layout>
       <BrowserRouter>
         <Routes>
           <Route path="" Component={Login} />
@@ -23,9 +24,14 @@ function App() {
           </Route>   
         </Routes>
       </BrowserRouter>
-    </>
+    </Layout>
   );
 
 }
+
+const Layout = styled.div`
+  max-width: 1000px;
+  margin: 0 auto;
+`;
 
 export default App;

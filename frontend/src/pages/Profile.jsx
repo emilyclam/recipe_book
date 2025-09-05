@@ -4,6 +4,7 @@ import styled from 'styled-components';
 
 import { Button, SubTitle, SkinnyInput } from '@components/ui';
 import api from '@api/api';
+import { logout } from '@api/auth';
 
 const Profile = () => {
   const { savedRecipes } = useOutletContext();
@@ -15,18 +16,15 @@ const Profile = () => {
   const [shaking, setShaking] = useState(false);
 
   useEffect(() => {
-    api.get('/api/accounts/details')
-      .then((res) => {
-        setProfile(res.data);
-        setNewProfile(res.data);
-      })
-      .catch((err) => console.error(err))
+    if (!profile) {
+      api.get('/api/accounts/details')
+        .then((res) => {
+          setProfile(res.data);
+          setNewProfile(res.data);
+        })
+        .catch((err) => console.error(err))
+    }
   }, []);
-
-  const logout = () => {
-    localStorage.clear();
-    navigate('/');
-  }
 
   const triggerShake = () => {
     setShaking(true);

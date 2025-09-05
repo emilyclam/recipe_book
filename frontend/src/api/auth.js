@@ -18,12 +18,15 @@ export const refresh = async () => {
   const res = await api.post("/api/accounts/token/refresh", {
     refresh: localStorage.getItem("refresh"),
   });
+  
   localStorage.setItem("access", res.data.access);
+  if (res.data.refresh) {
+    localStorage.setItem("refresh", res.data.refresh);
+  }
   return res.data.access;
 };
 
 export const logout = () => {
-  localStorage.removeItem("access");
-  localStorage.removeItem("refresh");
-  window.location.href = "";
+  localStorage.clear()
+  window.location.href = '/';
 };

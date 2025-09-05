@@ -1,9 +1,8 @@
 import React, { useState } from "react";
-import { useNavigate, Link } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 import styled from 'styled-components';
 
-import { LoginContainer, SubTitle, MediumInput, Button } from "@components/ui";
-import { font } from "styles";
+import { LoginContainer, SubTitle, MediumInput, Button, StyledLink } from "@components/ui";
 import { login } from "@api/auth";
 
 const Login = () => {
@@ -64,12 +63,6 @@ const Login = () => {
     </LoginContainer>
   );
 }
-
-const StyledLink = styled(Link)`
-  color: black;
-  ${font.size(15)}
-  ${font.bold}
-`;
 
 const ErrorText = styled.p`
   color: red;

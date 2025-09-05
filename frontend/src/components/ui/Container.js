@@ -11,16 +11,14 @@ export const LoginContainer = styled.form`
 export const NavContainer = styled.div`
   display: flex;
   align-items: center;
-  position: absolute;
-  top: 40px;
-  right: 40px;
-  gap: 20px
+  gap: 20px;
+  margin-right: 10px;
 `;
 
 export const HeaderContainer = styled.div`
   margin-top: 6px;
   display: flex;
-  justify-content: center;
+  justify-content: space-between;
 `;
 
 export const BodyContainer = styled.div`

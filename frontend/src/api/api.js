@@ -1,4 +1,5 @@
 import axios from 'axios';
+import { logout } from './auth';
 
 let accessToken = localStorage.getItem('access');
 
@@ -43,15 +44,12 @@ api.interceptors.response.use(
         if (refresh) {
           localStorage.setItem('refresh', refresh)
         }
-
         api.defaults.headers.Authorization = `Bearer ${access}`;
         originalRequest.headers.Authorization = `Bearer ${access}`;
 
         return api(originalRequest);
       } catch (err) {
-        localStorage.removeItem('access');
-        localStorage.removeItem('refresh');
-        window.location.href = '/';
+        logout();
         return Promise.reject(err);
       }
     }
