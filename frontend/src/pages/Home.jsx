@@ -8,11 +8,18 @@ import api from '@api/api';
 
 const Recipe = () => {
   const [savedRecipes, setSavedRecipes] = useState(null);
+  const [profile, setProfile] = useState({});
 
   useEffect(() => {
     api.get('/api/recipes/saved')
       .then((res) => {
         setSavedRecipes(res.data);
+      })
+      .catch((err) => console.error(err))
+    
+    api.get('/api/accounts/details')
+      .then((res) => {
+        setProfile(res.data);
       })
       .catch((err) => console.error(err))
   }, []);
@@ -21,7 +28,7 @@ const Recipe = () => {
     <>
       <HeaderBar />
       <BodyContainer>
-        <Outlet context={{ savedRecipes, setSavedRecipes }} />
+        <Outlet context={{ savedRecipes, setSavedRecipes, profile, setProfile }} />
       </BodyContainer>
       <Footer />
     </>

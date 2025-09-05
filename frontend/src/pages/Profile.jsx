@@ -8,23 +8,16 @@ import { logout } from '@api/auth';
 
 const Profile = () => {
   const { savedRecipes } = useOutletContext();
-  const navigate = useNavigate();
-  const [profile, setProfile] = useState({});
+  const { profile, setProfile } = useOutletContext();
   const [newProfile, setNewProfile] = useState({});
   const [editState, setEditState] = useState(false);
   const [passwords, setPasswords] = useState({1: undefined, 2: undefined});
   const [shaking, setShaking] = useState(false);
 
   useEffect(() => {
-    if (!profile) {
-      api.get('/api/accounts/details')
-        .then((res) => {
-          setProfile(res.data);
-          setNewProfile(res.data);
-        })
-        .catch((err) => console.error(err))
-    }
-  }, []);
+    setNewProfile(profile);
+  }, [])
+    
 
   const triggerShake = () => {
     setShaking(true);
