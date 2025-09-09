@@ -26,7 +26,7 @@ SECRET_KEY = 'django-insecure-dxtz5(ok4zw=0q#7a*4n^tm^qa&rs8!mk#my%p+!dj#3re4$7w
 DEBUG = True
 
 ALLOWED_HOSTS = [
-  'recipebook-rcvw.onrender.com'
+  'recipebook-rcvw.onrender.com',
 ]
 
 
@@ -75,6 +75,7 @@ MIDDLEWARE = [
 
 CORS_ALLOWED_ORIGINS = [
     "http://localhost:3000",
+    "https://recipebook-emilyclam.onrender.com"
 ]
 
 ROOT_URLCONF = 'recipebook.urls'
