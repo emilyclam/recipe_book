@@ -25,7 +25,9 @@ SECRET_KEY = 'django-insecure-dxtz5(ok4zw=0q#7a*4n^tm^qa&rs8!mk#my%p+!dj#3re4$7w
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = [
+  'recipebook-rcvw.onrender.com'
+]
 
 
 # Application definition
