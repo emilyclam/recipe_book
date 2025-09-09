@@ -10,7 +10,8 @@ const SignUp = () => {
   const [shaking, setShaking] = useState(false);
   const [signupValue, setSignupValue] = useState({'username': '', 'email': '', 'password': ''});
   
-  const signup = () => {
+  const signup = (event) => {
+    event.preventDefault()
     api.post('/api/accounts/signup', signupValue)
       .then((res) => {
         navigate('/');
@@ -67,7 +68,7 @@ const SignUp = () => {
         style={{ visibility: shaking ? 'visible' : 'hidden' }}>
         Invalid username or email. Please try again.
       </ErrorText>
-      <Button onClick={signup}>Sign Up</Button>
+      <Button onClick={(e) => signup(e)}>Sign Up</Button>
       or <StyledLink to="/">Login</StyledLink>
     </LoginContainer>
   );
